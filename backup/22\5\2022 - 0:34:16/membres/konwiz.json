@@ -1,0 +1,71 @@
+{
+  "utilisateur": {
+    "nom in game": "konwiz",
+    "club": "BoisRythme",
+    "nickname": "Clara stp",
+    "ID discord": "konwiz#9428",
+    "roles": "Staff, Membre BoisRythme, Prof"
+  },
+  "stats": {
+    "tour": {
+      "Tour spatiale": "100",
+      "Tour temporelle": "39"
+    },
+    "teamdef1": {
+      "p1": {
+        "name": "Ren Si",
+        "speed": "98"
+      },
+      "p2": {
+        "name": "Jin Yuyao",
+        "speed": "204"
+      },
+      "p3": {
+        "name": "Ye Suhua",
+        "speed": "221"
+      }
+    },
+    "teamdef2": {
+      "p1": {
+        "name": "Pritzker",
+        "speed": "194"
+      },
+      "p2": {
+        "name": "Dhalia",
+        "speed": "250"
+      },
+      "p3": {
+        "name": "Chloé",
+        "speed": "164"
+      }
+    },
+    "teamoff1": {
+      "p1": {
+        "name": "Ren Si",
+        "speed": "98"
+      },
+      "p2": {
+        "name": "Jin Yuyao",
+        "speed": "204"
+      },
+      "p3": {
+        "name": "Ye Suhua",
+        "speed": "221"
+      }
+    },
+    "teamoff2": {
+      "p1": {
+        "name": "Pritzker",
+        "speed": "194"
+      },
+      "p2": {
+        "name": "Dhalia",
+        "speed": "250"
+      },
+      "p3": {
+        "name": "Chloé",
+        "speed": "164"
+      }
+    }
+  }
+}

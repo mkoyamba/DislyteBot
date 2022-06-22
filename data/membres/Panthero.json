@@ -1,0 +1,71 @@
+{
+  "utilisateur": {
+    "nom in game": "Panthero",
+    "club": "BoisRythme",
+    "nickname": "",
+    "ID discord": "",
+    "roles": ""
+  },
+  "stats": {
+    "tour": {
+      "Tour spatiale": "0",
+      "Tour temporelle": "0"
+    },
+    "teamdef1": {
+      "p1": {
+        "name": "",
+        "speed": ""
+      },
+      "p2": {
+        "name": "",
+        "speed": ""
+      },
+      "p3": {
+        "name": "",
+        "speed": ""
+      }
+    },
+    "teamdef2": {
+      "p1": {
+        "name": "",
+        "speed": ""
+      },
+      "p2": {
+        "name": "",
+        "speed": ""
+      },
+      "p3": {
+        "name": "",
+        "speed": ""
+      }
+    },
+    "teamoff1": {
+      "p1": {
+        "name": "",
+        "speed": ""
+      },
+      "p2": {
+        "name": "",
+        "speed": ""
+      },
+      "p3": {
+        "name": "",
+        "speed": ""
+      }
+    },
+    "teamoff2": {
+      "p1": {
+        "name": "",
+        "speed": ""
+      },
+      "p2": {
+        "name": "",
+        "speed": ""
+      },
+      "p3": {
+        "name": "",
+        "speed": ""
+      }
+    }
+  }
+}
