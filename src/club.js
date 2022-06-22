@@ -28,8 +28,8 @@ export class clubC {
 			this.remove(parsed);
 		else if (parsed.command === "role")
 			this.setRole(parsed);
-			else if (parsed.command === "list")
-			this.list(parsed);
+			else if (parsed.command === "members")
+			this.members(parsed);
 		return ;
 	}
 
@@ -157,8 +157,8 @@ export class clubC {
 		return this.message.channel.send("**Role du club assigné.**");
 	}
 
-	//affiche la liste des clubs et leurs infos
-	list (parsed) {
+	//affiche la liste des membres
+	members (parsed) {
 		let tools = new toolsC;
 		if (parsed["args"].length !== 0)
 			return this.error (3)

@@ -11,7 +11,7 @@ import DiscordJS from 'discord.js'
 
 // Class pour gérer les joueurs
 export class playerC {
-	constructor (msg, client) {
+	constructor (message, client) {
 		this.message = message;
 		this.client = client;
 	}

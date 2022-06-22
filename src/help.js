@@ -11,7 +11,7 @@ import DiscordJS from 'discord.js'
 
 // Class d'aide
 export class helpC {
-	constructor (msg, client) {
+	constructor (message, client) {
 		this.message = message;
 		this.client = client;
 	}
