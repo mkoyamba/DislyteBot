@@ -1,6 +1,5 @@
 // Public imports
 import fs from 'fs-extra'
-import DiscordJS from 'discord.js'
 
 // Private imports
 import { toolsC } from './tools.js'
@@ -11,13 +10,15 @@ import { toolsC } from './tools.js'
 
 // Class pour gérer le serveur (admin)
 export class servC {
-	constructor (message, client) {
+	constructor (message, client, servID, servName) {
 		this.message = message;
 		this.client = client;
+		this.servID = servID;
+		this.path = "servers/" + servName + "/";
 	}
 
 	//execute la commande voulue
-	exec () {
+	async exec () {
 		let parsed = this.parsing();
 		if (!parsed)
 			return ;
@@ -70,11 +71,12 @@ export class servC {
 		let nameRole = this.message.mentions.roles.first().name;
 		
 		//ecriture dans les properties
-		var datasheet = JSON.parse(fs.readFileSync('properties/server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
 		datasheet.roles.admin.id = tagRole;
 		datasheet.roles.admin.name = nameRole;
+		console.log(datasheet);
 		let newdata = JSON.stringify(datasheet, null, 2);
-		fs.writeFile('properties/server_properties.json', newdata, 'utf8', undefined);
+		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
 	}
 
 	//crée un backup (admin)

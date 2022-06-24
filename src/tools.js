@@ -16,6 +16,7 @@ export class toolsC {
 		return (0);
 	}
 
+	//calcul le nombre de clubs
 	clubLen (datasheet) {
 		let index = 0;
 		for (let i in datasheet.club) {
@@ -28,6 +29,17 @@ export class toolsC {
 		return (parseInt(index) - 1)
 	}
 
+	//club le nombre de joueurs dans un club
+	memberLen (datasheet, index) {
+		let number = 0;
+		for (let i in datasheet.club[index]["members"]) {
+			if (datasheet.club[index]["members"][i] !== "")
+				number++;
+		}
+		return number;	
+	}
+
+	//renvoie si le club existe
 	isClub (datasheet, clubname) {
 		let n = 0;
 		for (let i in datasheet.club) {
@@ -41,6 +53,7 @@ export class toolsC {
 		return (1)
 	}
 
+	//renvoie si le joueur est membre d'un serveur
 	isMember (message, datasheet) {
 		let index = 0;
 		for (let i in datasheet.club) {

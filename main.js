@@ -6,8 +6,9 @@ import dotenv from 'dotenv'
 // Own imports
 import { pars } from './src/parsing.js'
 
-dotenv.config()
+dotenv.config();
 
+//infos du serveur
 const client = new DiscordJS.Client({
 	intents: [
 		Intents.FLAGS.GUILDS,
@@ -16,17 +17,20 @@ const client = new DiscordJS.Client({
 	]
 });
 
+//démarrage du bot
 client.on('ready', () => {
 	console.log("DislyteBot démarre!");
 });
 
+//déconnexion du bot
 client.on("disconnected", () => {
 	console.log("DislyteBot ne fonctionne plus!");
 	process.exit(1);
 });
 
+//récupération du message
 client.on('message', message => {
-	pars(message, client);
+	pars(message, client, message.guild.id, message.guild.name);
 })
 
 client.login(process.env.TOKEN)

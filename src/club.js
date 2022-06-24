@@ -13,12 +13,14 @@ import { toolsC } from './tools.js'
 
 // Class pour gérer les clubs
 export class clubC {
-	constructor (message, client) {
+	constructor (message, client, servID, servName) {
 		this.message = message;
 		this.client = client;
+		this.servID = servID;
+		this.path = "servers/" + servName + "/";
 	}
 
-	exec () {
+	async exec () {
 		let parsed = this.parsing();
 		if (!parsed)
 			return ;
@@ -28,8 +30,10 @@ export class clubC {
 			this.remove(parsed);
 		else if (parsed.command === "role")
 			this.setRole(parsed);
-			else if (parsed.command === "members")
+		else if (parsed.command === "members")
 			this.members(parsed);
+		else if (parsed.command === "list")
+			this.list(parsed);
 		return ;
 	}
 
@@ -66,7 +70,7 @@ export class clubC {
 		let tools = new toolsC;
 		if (parsed["args"].length !== 2)
 			return this.error (3)
-		var datasheet = JSON.parse(fs.readFileSync('properties/server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
 		let admin = datasheet.roles.admin.id;
 		if (!this.message.member.roles.cache.has(admin.toString()))
 			return this.error (2)
@@ -93,7 +97,7 @@ export class clubC {
 			return this.error (9);
 		datasheet.club[index] = clubTemp;
 		let newdata = JSON.stringify(datasheet, null, 2);
-		fs.writeFile('properties/server_properties.json', newdata, 'utf8', undefined);
+		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
 		return this.message.channel.send("**Club ajouté.**");
 	}
 
@@ -102,7 +106,8 @@ export class clubC {
 		let tools = new toolsC;
 		if (parsed["args"].length !== 1)
 			return this.error (3)
-		var datasheet = JSON.parse(fs.readFileSync('properties/server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
+		let last = tools.clubLen(datasheet).toString();
 		let admin = datasheet.roles.admin.id;
 		if (!this.message.member.roles.cache.has(admin.toString()))
 			return this.error (2)
@@ -115,16 +120,15 @@ export class clubC {
 		}
 		if (!datasheet.club[index]["club name"] || datasheet.club[index]["club name"] !== clubname)
 			return this.error(6);
-		console.log(index);
 		for (let j in datasheet.club) {
 			if (parseInt(j) > parseInt(index)) {
 				let n = parseInt(j) - 1
 				datasheet.club[n.toString()] = datasheet.club[j];
 			}
 		}
-		datasheet.club["2"] = "";
+		datasheet.club[last] = "";
 		let newdata = JSON.stringify(datasheet, null, 2);
-		fs.writeFile('properties/server_properties.json', newdata, 'utf8', undefined);
+		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
 		return this.message.channel.send("**Club supprimé.**");
 	}
 
@@ -132,7 +136,7 @@ export class clubC {
 	setRole (parsed) {
 		if (parsed["args"].length !== 2)
 			return this.error (3)
-		var datasheet = JSON.parse(fs.readFileSync('properties/server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
 		let admin = datasheet.roles.admin.id;
 		if (!this.message.member.roles.cache.has(admin.toString()))
 			return this.error (2)
@@ -153,7 +157,7 @@ export class clubC {
 		datasheet.club[index]["role name"] = tagRole.name;
 		datasheet.club[index]["role id"] = tagRole.id;
 		let newdata = JSON.stringify(datasheet, null, 2);
-		fs.writeFile('properties/server_properties.json', newdata, 'utf8', undefined);
+		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
 		return this.message.channel.send("**Role du club assigné.**");
 	}
 
@@ -162,14 +166,32 @@ export class clubC {
 		let tools = new toolsC;
 		if (parsed["args"].length !== 0)
 			return this.error (3)
-		var datasheet = JSON.parse(fs.readFileSync('properties/server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
 		if (!tools.isMember(this.message, datasheet))
 			return this.error(2)
 		let temp = new msgTempC;
-		let msg = temp.clubMembers (datasheet);
+		let msg = temp.clubMembers(datasheet);
+		for (let i in msg) {
+			let msgE = new DiscordJS.MessageEmbed();
+			msgE.setDescription(msg[i]);
+			this.message.channel.send(msgE);
+		}
+		return ;
+	}
+
+	list (parsed) {
+		let tools = new toolsC;
+		if (parsed["args"].length !== 0)
+			return this.error (3)
+		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
+		if (!tools.isMember(this.message, datasheet))
+			return this.error(2);
+		let temp = new msgTempC;
+		let msg = temp.clubList (datasheet);
 		return this.message.channel.send(msg);
 	}
 
+	
 	error (x) {
 		if (x === 1) {
 			this.message.channel.send("**Ce n'est pas une commande valide : *help**");

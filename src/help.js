@@ -11,12 +11,14 @@ import DiscordJS from 'discord.js'
 
 // Class d'aide
 export class helpC {
-	constructor (message, client) {
+	constructor (message, client, servID, servName) {
 		this.message = message;
 		this.client = client;
+		this.servID = servID;
+		this.path = "servers/" + servName + "/";
 	}
 
-	exec () {
+	async exec () {
 		
 	}
 
