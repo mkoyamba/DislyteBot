@@ -93,12 +93,12 @@ export class clubC {
 		}
 		if (datasheet.club[index].length !== 0)
 			return this.error(5);
-		if (!tools.isClub(datasheet, clubname))
+		if (tools.isClub(datasheet, clubname))
 			return this.error (9);
 		datasheet.club[index] = clubTemp;
 		let newdata = JSON.stringify(datasheet, null, 2);
 		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
-		return this.message.channel.send("**Club ajouté.**");
+		return this.message.channel.send(`**Club ${clubname} ajouté pour ${tagRole}.**`);
 	}
 
 	//supression d'un club (admin)
@@ -129,7 +129,7 @@ export class clubC {
 		datasheet.club[last] = "";
 		let newdata = JSON.stringify(datasheet, null, 2);
 		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
-		return this.message.channel.send("**Club supprimé.**");
+		return this.message.channel.send(`**Club ${clubname} supprimé.**`);
 	}
 
 	//link un club a un role (admin)
@@ -158,19 +158,32 @@ export class clubC {
 		datasheet.club[index]["role id"] = tagRole.id;
 		let newdata = JSON.stringify(datasheet, null, 2);
 		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
-		return this.message.channel.send("**Role du club assigné.**");
+		return this.message.channel.send(`**Role ${tagRole} assigné pour ${clubname}.**`);
 	}
 
 	//affiche la liste des membres
 	members (parsed) {
 		let tools = new toolsC;
-		if (parsed["args"].length !== 0)
+		if (parsed["args"].length > 1)
 			return this.error (3)
 		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
 		if (!tools.isMember(this.message, datasheet))
 			return this.error(2)
 		let temp = new msgTempC;
 		let msg = temp.clubMembers(datasheet);
+		if (parsed.args.length === 1) {
+			let club = parsed.args[0];
+			if (!tools.isClub(datasheet, club)) {
+				return this.error(8)
+			}
+			for (let i in datasheet.club) {
+				if (datasheet.club[i] !== "" && datasheet.club[i]["club name"] === club) {
+					let msgE = new DiscordJS.MessageEmbed();
+					msgE.setDescription(msg[parseInt(i) - 1])
+					return this.message.channel.send(msgE)
+				}
+			}
+		}
 		for (let i in msg) {
 			let msgE = new DiscordJS.MessageEmbed();
 			msgE.setDescription(msg[i]);

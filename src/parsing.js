@@ -6,6 +6,7 @@ import { servC } from './serv.js'
 import { playerC } from './player.js'
 import { clubC } from './club.js'
 import { helpC } from './help.js'
+import { esperC } from './esper.js'
 import { objTempC } from './../templates/object_templates.js'
 
 /*		================		*/
@@ -70,6 +71,11 @@ export async function pars (message, client, servID, servName) {
 	else if (msg.startsWith("*player")) {
 		let player = new playerC(message, client, servID, servName);
 		return player.exec();
+	}
+
+	else if (msg.startsWith("*esper")) {
+		let esper = new esperC(message, client, servID, servName);
+		return esper.exec();
 	}
 
 	else {return}

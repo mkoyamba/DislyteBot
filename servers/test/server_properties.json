@@ -5,21 +5,72 @@
       "name": "Admin"
     }
   },
+  "channels": {
+    "welcome": "988380454942035968"
+  },
   "club": {
     "1": {
       "club name": "test",
       "role name": "Admin",
       "role id": "989148461767221318",
       "members": {
-        "1": "",
+        "1": {
+          "name": "konwiz",
+          "discord": "konwiz#9428",
+          "nickname": "[konwiz] - test",
+          "id": "234376416081215488",
+          "club": "test",
+          "stats": {
+            "level": "60",
+            "tour1": "100",
+            "tour2": "39",
+            "kronos": "10",
+            "apep": "10",
+            "fafnir": "10",
+            "update": "26/6/2022 - 21h18"
+          },
+          "box": {
+            "1": {
+              "name": "liling",
+              "level": "60",
+              "speed": "123"
+            },
+            "2": {
+              "name": "longmian",
+              "level": "50",
+              "speed": "200"
+            },
+            "3": {
+              "name": "jinyuyao",
+              "level": "60",
+              "speed": "220"
+            },
+            "4": {
+              "name": "rensi",
+              "level": "60",
+              "speed": "95"
+            },
+            "5": {
+              "name": "tangxuan",
+              "level": "60",
+              "speed": "117"
+            },
+            "6": {
+              "name": "pritzker",
+              "level": "50",
+              "speed": "194"
+            },
+            "7": {
+              "name": "sander",
+              "level": "60",
+              "speed": "184"
+            },
+            "8": ""
+          }
+        },
         "2": "",
         "3": "",
-        "4": {
-          "name": "testun",
-          "discord": "",
-          "nickname": "",
-          "id": ""
-        },
+        "4": "",
         "5": "",
         "6": "",
         "7": "",
@@ -35,12 +86,7 @@
         "17": "",
         "18": "",
         "19": "",
-        "20": {
-          "name": "testmember",
-          "discord": "",
-          "nickname": "",
-          "id": ""
-        },
+        "20": "",
         "21": "",
         "22": "",
         "23": "",
@@ -61,12 +107,7 @@
         "1": "",
         "2": "",
         "3": "",
-        "4": {
-          "name": "test2un",
-          "discord": "",
-          "nickname": "",
-          "id": ""
-        },
+        "4": "",
         "5": "",
         "6": "",
         "7": "",
@@ -82,12 +123,7 @@
         "17": "",
         "18": "",
         "19": "",
-        "20": {
-          "name": "test2member",
-          "discord": "",
-          "nickname": "",
-          "id": ""
-        },
+        "20": "",
         "21": "",
         "22": "",
         "23": "",
@@ -108,12 +144,7 @@
         "1": "",
         "2": "",
         "3": "",
-        "4": {
-          "name": "test3un",
-          "discord": "",
-          "nickname": "",
-          "id": ""
-        },
+        "4": "",
         "5": "",
         "6": "",
         "7": "",
@@ -129,12 +160,7 @@
         "17": "",
         "18": "",
         "19": "",
-        "20": {
-          "name": "test3member",
-          "discord": "",
-          "nickname": "",
-          "id": ""
-        },
+        "20": "",
         "21": "",
         "22": "",
         "23": "",
@@ -148,19 +174,14 @@
       }
     },
     "4": {
-      "club name": "test5",
+      "club name": "test4",
       "role name": "membre",
       "role id": "989148549977612298",
       "members": {
         "1": "",
         "2": "",
         "3": "",
-        "4": {
-          "name": "test5un",
-          "discord": "",
-          "nickname": "",
-          "id": ""
-        },
+        "4": "",
         "5": "",
         "6": "",
         "7": "",
@@ -176,12 +197,7 @@
         "17": "",
         "18": "",
         "19": "",
-        "20": {
-          "name": "test5member",
-          "discord": "",
-          "nickname": "",
-          "id": ""
-        },
+        "20": "",
         "21": "",
         "22": "",
         "23": "",
@@ -195,7 +211,7 @@
       }
     },
     "5": {
-      "club name": "test4",
+      "club name": "test5",
       "role name": "membre",
       "role id": "989148549977612298",
       "members": {

@@ -13,6 +13,9 @@ export class objTempC {
 				"name": ""
 				}
 			},
+			"channels": {
+				"welcome": ""
+			},
 			"club": {
 				"1": "",
 				"2": "",
@@ -35,6 +38,17 @@ export class objTempC {
 			"discord": nameDiscord,
 			"nickname": nickname,
 			"id": id,
+			"club": "",
+			"stats": {
+				"level": "",
+				"tour1": "",
+				"tour2": "",
+				"kronos": "",
+				"apep": "",
+				"fafnir": "",
+				"update": ""
+			},
+			"box": ""
 		}
 		return result
 	}
@@ -123,6 +137,19 @@ export class objTempC {
 				"29": "",
 				"30": ""
 			}
+		}
+		return (result);
+	}
+
+	get esperT () {
+		return this.esperTemplate();
+	}
+
+	esperTemplate () {
+		let result = {
+			"name": "",
+			"level": "",
+			"speed": ""
 		}
 		return (result);
 	}

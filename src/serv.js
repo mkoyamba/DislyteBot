@@ -25,7 +25,9 @@ export class servC {
 		if (parsed.command === "set admin")
 			this.setAdmin(parsed);
 		else if (parsed.command === "set backup")
-			this.setBackup(parsed);
+			this.setBackup();
+		else if (parsed.command === "set welcome")
+			this.setWelcome(parsed);
 		return ;
 	}
 
@@ -35,7 +37,7 @@ export class servC {
 		let tools = new toolsC;
 
 		//liste des commandes
-		const possibilities = ["set admin", "set backup"];
+		const possibilities = ["set admin", "set backup", "set welcome"];
 
 		//protections
 		if (!msg.startsWith("*server set "))
@@ -74,14 +76,29 @@ export class servC {
 		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
 		datasheet.roles.admin.id = tagRole;
 		datasheet.roles.admin.name = nameRole;
-		console.log(datasheet);
 		let newdata = JSON.stringify(datasheet, null, 2);
 		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
+		return this.message.channel.send(`**Le rôle admin a été défini pour ${this.message.mentions.roles.first()}.**`);
 	}
 
 	//crée un backup (admin)
 	setBackup () {
 
+	}
+
+	//link le channel de bienvenue
+	setWelcome (parsed) {
+		if (this.message.member.guild.ownerID !== this.message.member.user.id)
+			return this.error(2);
+		if (parsed["args"].length !== 1)
+			return this.error(1);
+		if (!this.message.mentions.channels.first())
+			return this.error(4);
+		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
+		datasheet.channels.welcome = this.message.mentions.channels.first().id;
+		let newdata = JSON.stringify(datasheet, null, 2);
+		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
+		return this.message.channel.send(`**Le salon de bienvenue est désormais ${this.message.mentions.channels.first()}.**`);
 	}
 
 	//erreur de commande
@@ -94,6 +111,9 @@ export class servC {
 		}
 		else if (x === 3) {
 			this.message.channel.send("**Il faut mentionner le rôle!**");
+		}
+		else if (x === 4) {
+			this.message.channel.send("**Il faut mentionner le channel!**");
 		}
 	}
 }
