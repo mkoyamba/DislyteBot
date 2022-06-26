@@ -199,10 +199,13 @@ export class toolsC {
 		let month = (parseInt(allDate.getMonth()) + 1).toString();
 		let year = allDate.getFullYear();
 		let hour = allDate.getHours();
-		let minute = allDate.getMinutes();
-		if (minute.length === 1) {
-			minute = "0" + minute;
+		let minuteB = allDate.getMinutes();
+		let minute;
+		if (minuteB < 10) {
+			minute = "0" + minuteB.toString();
 		}
+		else
+			minute = minuteB.toString();
 		return `${day}/${month}/${year} - ${hour}h${minute}`;
 	}
 }
