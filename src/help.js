@@ -53,9 +53,7 @@ export class helpC {
 		msg += "  *esper admin remove [pseudo][esper]             *help esper\n\n\n";
 		msg += "# DyslyteHelper by konwiz\n";
 		msg += "```";
-		let msgE = new DiscordJS.MessageEmbed();
-		msgE.setDescription(msg);
-		return this.message.channel.send(msgE)
+		return this.message.channel.send(msg)
 	}
 
 	server () {
