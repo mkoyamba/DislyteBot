@@ -198,7 +198,7 @@ export class toolsC {
 		let day = allDate.getDate();
 		let month = (parseInt(allDate.getMonth()) + 1).toString();
 		let year = allDate.getFullYear();
-		let hour = allDate.getHours();
+		let hour = (allDate.getHours() + 2) % 24;
 		let minuteB = allDate.getMinutes();
 		let minute;
 		if (minuteB < 10) {
