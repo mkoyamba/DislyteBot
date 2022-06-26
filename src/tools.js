@@ -200,6 +200,9 @@ export class toolsC {
 		let year = allDate.getFullYear();
 		let hour = allDate.getHours();
 		let minute = allDate.getMinutes();
+		if (minute.length === 1) {
+			minute = "0" + minute;
+		}
 		return `${day}/${month}/${year} - ${hour}h${minute}`;
 	}
 }
