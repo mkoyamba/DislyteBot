@@ -62,7 +62,7 @@ export class helpC {
 		msg += "#   *server set admin [tag du rôle]:\n";
 		msg += "        Définit le rôle admin.\n        Il faut tag le rôle en faisant @[insérer le role].\n        Prporiétaire uniquement.\n\n";
 		msg += "#   *server set welcome [tag du salon] :\n";
-		msg += "        Définit le salon d`accueil.\ne pas faire la commande pour ne pas avoir de messages de bienvenue.\n        Il faut tag le salon en faisant #[insérer le salon].\n        Admin uniquement.\n\n\n";
+		msg += "        Définit le salon d`accueil.\n        Ne pas faire la commande pour ne pas avoir de messages de bienvenue.\n        Il faut tag le salon en faisant #[insérer le salon].\n        Admin uniquement.\n\n\n";
 		msg += "# DyslyteHelper by konwiz\n";
 		msg += "```";
 		return this.message.channel.send(msg)
@@ -118,15 +118,15 @@ export class helpC {
 		let msg = "```cs\n";
 		msg += "    Liste des commandes esper :\n\n\n";
 		msg += "#   *esper [esper][niveau][speed] :\n";
-		msg += "        Ajoute un esper à votre box ou modifie ses stats.\n        Le nom de l'esper doit être sans les espaces.\n\n";
+		msg += "        Ajoute un esper à votre box ou modifie ses stats.\n        Le nom de l`esper doit être sans les espaces.\n\n";
 		msg += "#   *esper remove [esper] :\n";
-		msg += "        Supprime l'esper de votre box.\n        Le nom de l'esper doit être sans les espaces.\n\n";
+		msg += "        Supprime l`esper de votre box.\n        Le nom de l`esper doit être sans les espaces.\n\n";
 		msg += "#   *esper list {en maintenance} :\n";
 		msg += "        Affiche la liste des esper.\n\n";
 		msg += "#   *esper admin [pseudo][esper][niveau][speed] :\n";
-		msg += "        Ajoute un esper à la box du joueur ou modifie ses stats.\n        Le nom de l'esper doit être sans les espaces.\n         Admin uniquement.\n\n";
+		msg += "        Ajoute un esper à la box du joueur ou modifie ses stats.\n        Le nom de l`esper doit être sans les espaces.\n         Admin uniquement.\n\n";
 		msg += "#   *esper admin remove [esper] :\n";
-		msg += "        Supprime l'esper de la box du joueur.\n        Le nom de l'esper doit être sans les espaces.\n         Admin uniquement.\n\n\n";
+		msg += "        Supprime l`esper de la box du joueur.\n        Le nom de l`esper doit être sans les espaces.\n         Admin uniquement.\n\n\n";
 		msg += "# DyslyteHelper by konwiz\n";
 		msg += "```";
 		return this.message.channel.send(msg)
