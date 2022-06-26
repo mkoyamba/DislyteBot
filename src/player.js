@@ -52,8 +52,6 @@ export class playerC {
 			this.add(parsed);
 		else if (parsed.command === "remove")
 			this.remove(parsed);
-		else if (parsed.command === "update")
-			this.setInfos(parsed);
 		else if (parsed.command === "info")
 			this.getInfos(parsed);
 		else if (parsed.command === "stat set")
