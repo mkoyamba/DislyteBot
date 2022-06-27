@@ -269,14 +269,7 @@ export class playerC {
 			datasheet.club[pos[0]].members[pos[1]].stats["apep"] = parsed.args[4];
 			datasheet.club[pos[0]].members[pos[1]].stats["fafnir"] = parsed.args[5];
 		}
-		let allDate = new Date();
-
-		let day = allDate.getDate();
-		let month = (parseInt(allDate.getMonth()) + 1).toString();
-		let year = allDate.getFullYear();
-		let hour = allDate.getHours();
-		let minute = allDate.getMinutes();
-		let date = `${day}/${month}/${year} - ${hour}h${minute}`;
+		let date = tools.timeStamp;
 		datasheet.club[pos[0]].members[pos[1]].stats["update"] = date;
 		let newdata = JSON.stringify(datasheet, null, 2);
 		fs.writeFile(this.path, newdata, 'utf8', undefined);
