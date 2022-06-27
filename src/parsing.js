@@ -46,13 +46,9 @@ export async function pars (message, client, servID, servName) {
 		fs.writeFile('server_list.json', newdata, 'utf8', undefined);
 		return message.channel.send("**Données du serveur créées, merci d'utiliser DislyteBot!**");
 	}
-
-	//protection
-	if (!msg.startsWith("*"))
-		return ;
 	
 	//lance la commande *help
-	else if (msg.startsWith("*help")) {
+	if (msg.startsWith("*help")) {
 		let help = new helpC(message, client, servID, servName);
 		return help.exec();
 	}

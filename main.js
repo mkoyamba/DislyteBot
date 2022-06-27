@@ -5,6 +5,8 @@ import dotenv from 'dotenv'
 
 // Own imports
 import { pars } from './src/parsing.js'
+import { googleC } from './src/google.js'
+
 
 dotenv.config();
 
@@ -30,7 +32,11 @@ client.on("disconnected", () => {
 
 //récupération du message
 client.on('message', message => {
-	pars(message, client, message.guild.id, message.guild.name);
+	if (message.content.startsWith("*")) {
+		let google = new googleC;
+		google.update;
+		//pars(message, client, message.guild.id, message.guild.name);
+	}
 })
 
 client.login(process.env.TOKEN)

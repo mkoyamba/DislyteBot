@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "backend-dyslitebot",
+  "private_key_id": "6a9f5d320c30ee4221750c4c3af3d4a5df13c037",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCHK+T3xHk4pgpS\nSA6cLe++PjgbmSlDLgSflL3S9awSsx1rICYmEvTdUcAg0wLCE9Q2czyVPmedkQVy\nzoThmf2qSeum8Ra55GQmnLQOFOnzBWFi1OkPu5DZplN1GWU3KTIcc4fGEzUZmpss\no+ZTRIDdtXrOeL3EGdc6O6snP/UIxoERcHWpKQw2Mu9M6CWoUbb46iYRHAz/qX4Q\nPO/8FGdg1/20dYcKkQBfnSdmlItZjNOYfOKqI1SwjyhWYUyKlzVFSrcEXbvKwjrS\neOo9roKTyEptoYiqhJdt06J78+MXa0Vaeu6eHUNvwdw6VUEdt+rlwUqCbATqjSDp\nNcyvvZdFAgMBAAECggEACDJLMhMB3sOCwLaJ3EKU1Q5kzJee/undcefNEuu+wWuH\nDyXl6k0f+AOrCNKCyk31gk++jrY4Bj/y+qE3QY7a6OaOmZLo8+C7ifPanzf5b7kV\nzK5oa4HOKMSDLwiZMJ0Y4szGoOYtRB4x5qURpF71CXyls7tyll+Sw382w6yHKT75\nqL1dzr1pBwCbczeBqV2Pqf2P6wxEwhr6CgYB4ADCRpH54whG85BK3FGruc51feri\nsiplRKQL3lG4N5lHmPkztblLn89aHYZhDGKc3aU0+zGqBO9PtzuXasOOaddlinv9\nnjUjYxNACoehyAmRNbUykzqkbZpElUvd4/0gCMobiQKBgQC8dMy3cu5iTWEpJf+g\n2IW85CrOymQCxb3GX28SeuhZvdytk+sTSn0PAy4hkIkFfpUFvPHPg9NdiyTTEHLI\nFGDNIooFhgo2nTjHkpxyww3rrUxRgUMqIDlh/kEP8Gm3VHd2gM7CkNWQA5H7Txf9\nIIOwOKNYWVyd1KkSTbTU+M5wxwKBgQC3nh6eYdOb1u8/qDMPIH/Eg3f4ipqtcG+j\nRRfTEW3fCmwELUkA92XbKWE7+0RiqJF3ufmnX/JliUp5xzAlv/wg1DnXr92jhusS\ncXxF/SKLy2MHUIS4kAHbvfjLJL1b9FPJCjIPb6u8U5miU0DK7begCzf+QV2YVFkY\nBZmz85uDkwKBgA/uP6/yQzyEFgaIc8eBBi0ljIjWiwXA+X3fa2BAi4uqhREXQ/Pp\nhBDUz/1+XlbckHRfuIE2P5PUw1QkO8+2CUjN9qTo48wiFj6oohkBbBfUGnN5Xdgd\nyTwDZjSWuhkJRt/5m4DPBX6bDqgT049ORFONNiGtzCp7Y59sejDWp3zZAoGANG6I\nW72fiU6Uvt6uxdEH6vuHlIcvp/sFReAC75h4gUoekgrEX+xFP5HPXCth2bI8561J\nZsv1EZ1kkOWaEA2EV3OCmN51Ma7jDT8ut2WTKcwIGRya6YDlpvPWSVvSXqGkEzJA\nHTxME9jjdADF7ax31NGfSZEswsTDNCLVQxd6/tUCgYAYPMf/LLYPS1e7h30ciH+C\nlda1P93zEmjEnA4r4fGkwahlaO1Ul6k0NRG0F7c31UMFDYVkel3j72WUWF5AL327\nWE1O2KCcIQp8X5/G3GZs9k6zrP2UD7QqVWBOABeWHg5WcNz8QE4z98BiY7WAwUcM\npMOuJ8ESWEcNDmSIPIpFTg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "dislytebotsa@backend-dyslitebot.iam.gserviceaccount.com",
+  "client_id": "116495171566297723797",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/dislytebotsa%40backend-dyslitebot.iam.gserviceaccount.com"
+}
