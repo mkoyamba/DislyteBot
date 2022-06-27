@@ -48,7 +48,9 @@ export class objTempC {
 				"fafnir": "",
 				"update": ""
 			},
-			"box": ""
+			"box": {
+				"1": ""
+			}
 		}
 		return result
 	}
