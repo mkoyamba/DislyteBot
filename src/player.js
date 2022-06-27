@@ -17,7 +17,7 @@ export class playerC {
 		this.message = message;
 		this.client = client;
 		this.servID = servID;
-		this.path = "servers/" + servName + "/";
+		this.path = "servers/" + servID + ".json";
 
 		this.elist = ["donar", "jinyuyao", "tiye", "lewis", "tangxuan",
 				"raven", "narmer", "liling", "triki", "hyde", "biondina",
@@ -113,7 +113,7 @@ export class playerC {
 			return this.error (3)
 		if (parsed.args[0].length > 20)
 			return this.error (7)
-		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		let admin = datasheet.roles.admin.id;
 		if (!this.message.member.roles.cache.has(admin.toString()))
 			return this.error (2)
@@ -174,7 +174,7 @@ export class playerC {
 		if (chanID !== "")
 		chan.send(`**Bienvenue à ${tagPlayer} qui rejoint ${club}!**`)
 		let newdata = JSON.stringify(datasheet, null, 2);
-		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
+		fs.writeFile(this.path, newdata, 'utf8', undefined);
 		this.message.channel.send(`**Membre ajouté.**`)
 	}
 
@@ -183,7 +183,7 @@ export class playerC {
 		let tools = new toolsC;
 		if (parsed.args.length !== 1)
 			return this.error (3)
-		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		let admin = datasheet.roles.admin.id;
 		if (!this.message.member.roles.cache.has(admin.toString()))
 			return this.error (2)
@@ -211,7 +211,7 @@ export class playerC {
 		}
 		datasheet.club[clubIndex].members["30"] = "";
 		let newdata = JSON.stringify(datasheet, null, 2);
-		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
+		fs.writeFile(this.path, newdata, 'utf8', undefined);
 		this.message.channel.send(`**Membre supprimé.**`)
 	}
 
@@ -220,7 +220,7 @@ export class playerC {
 		let tools = new toolsC;
 		if (parsed.args.length !== 1)
 			return this.error (3)
-		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		if (!tools.isMember(this.message, datasheet))
 			return this.error (2)
 		if (!tools.isName(datasheet, parsed.args[0]))
@@ -235,7 +235,7 @@ export class playerC {
 		let tools = new toolsC;
 		if (parsed.args.length !== 2 && parsed.args.length !== 6)
 			return this.error(3)
-		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		if (!tools.isMember(this.message, datasheet))
 			return this.error(2)
 		if (!tools.isID(datasheet, this.message.author.id))
@@ -279,7 +279,7 @@ export class playerC {
 		let date = `${day}/${month}/${year} - ${hour}h${minute}`;
 		datasheet.club[pos[0]].members[pos[1]].stats["update"] = date;
 		let newdata = JSON.stringify(datasheet, null, 2);
-		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
+		fs.writeFile(this.path, newdata, 'utf8', undefined);
 		return this.message.channel.send("**Informations modifiées!**")
 	}
 
@@ -287,7 +287,7 @@ export class playerC {
 		let tools = new toolsC;
 		if (parsed.args.length !== 3 && parsed.args.length !== 7)
 			return this.error(3)
-		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		if (!this.message.member.roles.cache.has(datasheet.roles.admin.id))
 			return this.error(2)
 		if (!tools.isName(datasheet, parsed.args[0]))
@@ -324,7 +324,7 @@ export class playerC {
 		let date = tools.timeStamp
 		datasheet.club[pos[0]].members[pos[1]].stats["update"] = date;
 		let newdata = JSON.stringify(datasheet, null, 2);
-		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
+		fs.writeFile(this.path, newdata, 'utf8', undefined);
 		return this.message.channel.send("**Informations modifiées!**")
 	}
 
@@ -332,7 +332,7 @@ export class playerC {
 		let tools = new toolsC;
 		if (parsed.args.length)
 			return this.error(3)
-		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		if (!tools.isID(datasheet, this.message.author.id))
 			return this.error(10)
 		let pos = tools.getPosID(datasheet, this.message.author.id);

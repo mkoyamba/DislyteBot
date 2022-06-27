@@ -1,9 +1,7 @@
 import fs from 'fs-extra'
-import DiscordJS from 'discord.js'
 
 // Private imports
 import { objTempC } from './../templates/object_templates.js'
-import { msgTempC } from './../templates/message_templates.js'
 import { toolsC } from './tools.js'
 
 /*		=================		*/
@@ -16,7 +14,7 @@ export class esperC {
 		this.message = message;
 		this.client = client;
 		this.servID = servID;
-		this.path = "servers/" + servName + "/";
+		this.path = "servers/" + servID + ".json";
 
 
 		this.elist = ["donar", "jinyuyao", "tiye", "lewis", "tangxuan",
@@ -103,7 +101,7 @@ export class esperC {
 		let speed = parsed.args[2];
 		if (!tools.isInList(this.elist, esper))
 			return this.error(5)
-		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		if (!tools.isID(datasheet, this.message.author.id))
 			return this.error(4)
 		let pos = tools.getPosID(datasheet, this.message.author.id);
@@ -135,7 +133,7 @@ export class esperC {
 		}
 		datasheet.club[pos[0]].members[pos[1]].stats.update = tools.timeStamp;
 		let newdata = JSON.stringify(datasheet, null, 2);
-		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
+		fs.writeFile(this.path, newdata, 'utf8', undefined);
 		return ;
 	}
 
@@ -149,7 +147,7 @@ export class esperC {
 		let speed = parsed.args[3];
 		if (!tools.isInList(this.elist, esper))
 			return this.error(5)
-		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		if (!tools.isName(datasheet, pseudo))
 			return this.error(4)
 		let pos = tools.getPosName(datasheet, pseudo);
@@ -180,7 +178,7 @@ export class esperC {
 		}
 		datasheet.club[pos[0]].members[pos[1]].stats.update = tools.timeStamp;
 		let newdata = JSON.stringify(datasheet, null, 2);
-		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
+		fs.writeFile(this.path, newdata, 'utf8', undefined);
 		return ;
 	}
 
@@ -191,7 +189,7 @@ export class esperC {
 		let esper = parsed.args[0].toLowerCase();
 		if (!tools.isInList(this.elist, esper))
 			return this.error(5)
-		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		if (!tools.isID(datasheet, this.message.author.id))
 			return this.error(4)
 		let pos = tools.getPosID(datasheet, this.message.author.id);
@@ -223,7 +221,7 @@ export class esperC {
 			this.error(6)
 		datasheet.club[pos[0]].members[pos[1]].stats.update = tools.timeStamp;
 		let newdata = JSON.stringify(datasheet, null, 2);
-		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
+		fs.writeFile(this.path, newdata, 'utf8', undefined);
 		return ;
 	}
 
@@ -235,7 +233,7 @@ export class esperC {
 		let esper = parsed.args[1].toLowerCase();
 		if (!tools.isInList(this.elist, esper))
 			return this.error(5)
-		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		if (!tools.isName(datasheet, pseudo)) {
 			return this.error(4)
 		}
@@ -267,7 +265,7 @@ export class esperC {
 			this.error(6)
 		datasheet.club[pos[0]].members[pos[1]].stats.update = tools.timeStamp;
 		let newdata = JSON.stringify(datasheet, null, 2);
-		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
+		fs.writeFile(this.path, newdata, 'utf8', undefined);
 		return ;
 	}
 
@@ -275,7 +273,7 @@ export class esperC {
 		let tools = new toolsC;
 		if (parsed.args.length !== 4 && parsed.args.length !== 3)
 			return this.error(3)
-		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		if (!this.message.member.roles.cache.has(datasheet.roles.admin.id)) {
 			return this.error(2)
 		}
