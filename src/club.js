@@ -17,7 +17,7 @@ export class clubC {
 		this.message = message;
 		this.client = client;
 		this.servID = servID;
-		this.path = "servers/" + servName + "/";
+		this.path = "servers/" + servID + ".json";
 	}
 
 	async exec () {
@@ -70,7 +70,7 @@ export class clubC {
 		let tools = new toolsC;
 		if (parsed["args"].length !== 2)
 			return this.error (3)
-		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		let admin = datasheet.roles.admin.id;
 		if (!this.message.member.roles.cache.has(admin.toString()))
 			return this.error (2)
@@ -97,7 +97,7 @@ export class clubC {
 			return this.error (9);
 		datasheet.club[index] = clubTemp;
 		let newdata = JSON.stringify(datasheet, null, 2);
-		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
+		fs.writeFile(this.path, newdata, 'utf8', undefined);
 		return this.message.channel.send(`**Club ${clubname} ajouté pour ${tagRole}.**`);
 	}
 
@@ -106,7 +106,7 @@ export class clubC {
 		let tools = new toolsC;
 		if (parsed["args"].length !== 1)
 			return this.error (3)
-		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		let last = tools.clubLen(datasheet).toString();
 		let admin = datasheet.roles.admin.id;
 		if (!this.message.member.roles.cache.has(admin.toString()))
@@ -128,7 +128,7 @@ export class clubC {
 		}
 		datasheet.club[last] = "";
 		let newdata = JSON.stringify(datasheet, null, 2);
-		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
+		fs.writeFile(this.path, newdata, 'utf8', undefined);
 		return this.message.channel.send(`**Club ${clubname} supprimé.**`);
 	}
 
@@ -136,7 +136,7 @@ export class clubC {
 	setRole (parsed) {
 		if (parsed["args"].length !== 2)
 			return this.error (3)
-		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		let admin = datasheet.roles.admin.id;
 		if (!this.message.member.roles.cache.has(admin.toString()))
 			return this.error (2)
@@ -157,7 +157,7 @@ export class clubC {
 		datasheet.club[index]["role name"] = tagRole.name;
 		datasheet.club[index]["role id"] = tagRole.id;
 		let newdata = JSON.stringify(datasheet, null, 2);
-		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
+		fs.writeFile(this.path, newdata, 'utf8', undefined);
 		return this.message.channel.send(`**Role ${tagRole} assigné pour ${clubname}.**`);
 	}
 
@@ -166,7 +166,7 @@ export class clubC {
 		let tools = new toolsC;
 		if (parsed["args"].length > 1)
 			return this.error (3)
-		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		if (!tools.isMember(this.message, datasheet))
 			return this.error(2)
 		let temp = new msgTempC;
@@ -196,7 +196,7 @@ export class clubC {
 		let tools = new toolsC;
 		if (parsed["args"].length !== 0)
 			return this.error (3)
-		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		if (!tools.isMember(this.message, datasheet))
 			return this.error(2);
 		let temp = new msgTempC;

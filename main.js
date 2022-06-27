@@ -1,14 +1,18 @@
 // Mandatory imports
-
 import DiscordJS, { Guild, Intents } from 'discord.js'
 import dotenv from 'dotenv'
+import fs from 'fs-extra'
 
 // Own imports
 import { pars } from './src/parsing.js'
 import { googleC } from './src/google.js'
 
-
 dotenv.config();
+fs.mkdir("servers").catch((error) => {
+	console.log("Dossier déjà présent.")
+});
+let googleU = new googleC;
+googleU.getDrive();
 
 //infos du serveur
 const client = new DiscordJS.Client({
@@ -33,9 +37,7 @@ client.on("disconnected", () => {
 //récupération du message
 client.on('message', message => {
 	if (message.content.startsWith("*")) {
-		let google = new googleC;
-		google.update;
-		//pars(message, client, message.guild.id, message.guild.name);
+		pars(message, client, message.guild.id, message.guild.name);
 	}
 })
 

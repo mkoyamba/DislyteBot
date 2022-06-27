@@ -14,7 +14,7 @@ export class servC {
 		this.message = message;
 		this.client = client;
 		this.servID = servID;
-		this.path = "servers/" + servName + "/";
+		this.path = "servers/" + servID + ".json";
 	}
 
 	//execute la commande voulue
@@ -73,11 +73,11 @@ export class servC {
 		let nameRole = this.message.mentions.roles.first().name;
 		
 		//ecriture dans les properties
-		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		datasheet.roles.admin.id = tagRole;
 		datasheet.roles.admin.name = nameRole;
 		let newdata = JSON.stringify(datasheet, null, 2);
-		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
+		fs.writeFile(this.path, newdata, 'utf8', undefined);
 		return this.message.channel.send(`**Le rôle admin a été défini pour ${this.message.mentions.roles.first()}.**`);
 	}
 
@@ -94,10 +94,10 @@ export class servC {
 			return this.error(1);
 		if (!this.message.mentions.channels.first())
 			return this.error(4);
-		var datasheet = JSON.parse(fs.readFileSync(this.path + 'server_properties.json').toString());
+		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		datasheet.channels.welcome = this.message.mentions.channels.first().id;
 		let newdata = JSON.stringify(datasheet, null, 2);
-		fs.writeFile(this.path + 'server_properties.json', newdata, 'utf8', undefined);
+		fs.writeFile(this.path, newdata, 'utf8', undefined);
 		return this.message.channel.send(`**Le salon de bienvenue est désormais ${this.message.mentions.channels.first()}.**`);
 	}
 

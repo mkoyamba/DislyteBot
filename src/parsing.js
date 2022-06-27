@@ -8,6 +8,7 @@ import { clubC } from './club.js'
 import { helpC } from './help.js'
 import { esperC } from './esper.js'
 import { objTempC } from './../templates/object_templates.js'
+import { googleC } from './google.js'
 
 /*		================		*/
 /*		|	  MAIN	   |		*/
@@ -15,6 +16,7 @@ import { objTempC } from './../templates/object_templates.js'
 
 export async function pars (message, client, servID, servName) {
 	let msg = message.content;
+	let google = new googleC(servID);
 
 	//check serveur
 	var datasheet = JSON.parse(fs.readFileSync('server_list.json').toString());
@@ -30,12 +32,8 @@ export async function pars (message, client, servID, servName) {
 	if (state === 0) {
 		let temp = new objTempC;
 		let properties = temp.servP;
-		if (!fs.existsSync("servers/" + servName))
-			fs.mkdir("servers/" + servName);
-		else
-			return ;
 		let newdata = JSON.stringify(properties, null, 2);
-		fs.writeFile("servers/" + servName + "/server_properties.json", newdata, 'utf8', undefined);
+		fs.writeFile("servers/" + servID + ".json", newdata, 'utf8', undefined);
 		let newLast = parseInt(last) + 1;
 		datasheet[newLast.toString()] = {
 			"name": servName,
@@ -44,34 +42,41 @@ export async function pars (message, client, servID, servName) {
 		}
 		newdata = JSON.stringify(datasheet, null, 2);
 		fs.writeFile('server_list.json', newdata, 'utf8', undefined);
-		return message.channel.send("**Données du serveur créées, merci d'utiliser DislyteBot!**");
+		google.update();
+		google.updateList();
+		return message.channel.send("**Données du serveur créées, merci d'utiliser DislyteHelper!**");
 	}
 	
 	//lance la commande *help
 	if (msg.startsWith("*help")) {
 		let help = new helpC(message, client, servID, servName);
-		return help.exec();
+		help.exec();
+		return google.update();
 	}
 
 	//lance la commande *server
 	else if (msg.startsWith("*server")) {
 		let server = new servC(message, client, servID, servName);
-		return server.exec();
+		server.exec();
+		return google.update();
 	}
 
 	else if (msg.startsWith("*club")) {
 		let club = new clubC(message, client, servID, servName);
-		return club.exec();
+		club.exec();
+		return google.update();
 	}
 
 	else if (msg.startsWith("*player")) {
 		let player = new playerC(message, client, servID, servName);
-		return player.exec();
+		player.exec();
+		return google.update();
 	}
 
 	else if (msg.startsWith("*esper")) {
 		let esper = new esperC(message, client, servID, servName);
-		return esper.exec();
+		esper.exec();
+		return google.update();
 	}
 
 	else {return}

@@ -11,8 +11,8 @@ export class googleC {
 		this.servID = servID;
 	}
 
-	async update () {
-		const KEYFILEPATH = '../keyfile.json';
+	async isInDrive (filename) {
+		const KEYFILEPATH = 'keyfile.json';
 		const SCOPES = ['https://www.googleapis.com/auth/drive'];
 		const auth = new google.auth.GoogleAuth({
 			keyFile: KEYFILEPATH,
@@ -20,39 +20,116 @@ export class googleC {
 		});
 		const driveService = google.drive({version: 'v3', auth});
 
+		const list = await driveService.files.list({
+			'q': "'1w66DVUF_p8A7R8_uU8pELrOr4ur7AvUI' in parents"
+		});
+		const files = list.data.files;
+		for (let i in files) {
+			if (files[i].name === filename)
+				return files[i].id;
+		}
+		return 0;
+	}
 
+	async update () {
+		let id = await this.isInDrive(`${this.servID}.json`);
 
+		const KEYFILEPATH = 'keyfile.json';
+		const SCOPES = ['https://www.googleapis.com/auth/drive'];
+		const auth = new google.auth.GoogleAuth({
+			keyFile: KEYFILEPATH,
+			scopes: SCOPES
+		});
+		const driveService = google.drive({version: 'v3', auth});
 
+		if (id === 0) {
+			let fileMetaData = {
+				'name': `${this.servID}.json`,
+				'parents': [`1w66DVUF_p8A7R8_uU8pELrOr4ur7AvUI`]
+			}
+	
+			let media = {
+				mimeType: 'application/json',
+				body: fs.createReadStream(`servers/${this.servID}.json`)
+			}
+	
+			await driveService.files.create({
+				resource: fileMetaData,
+				media: media,
+			})
+		}
+		else {
+			let fileMetaData = {
+				'name': `${this.servID}.json`,
+			}
+	
+			let media = {
+				mimeType: 'application/json',
+				body: fs.createReadStream(`servers/${this.servID}.json`)
+			}
+	
+			await driveService.files.update({
+				fileId: id,
+				resource: fileMetaData,
+				media: media,
+			})
+		}
+	}
 
+	async updateList () {
+		let id = await this.isInDrive(`server_list.json`);
 
+		const KEYFILEPATH = 'keyfile.json';
+		const SCOPES = ['https://www.googleapis.com/auth/drive'];
+		const auth = new google.auth.GoogleAuth({
+			keyFile: KEYFILEPATH,
+			scopes: SCOPES
+		});
+		const driveService = google.drive({version: 'v3', auth});
 
-
-
-		//write
 		let fileMetaData = {
-			'name': `${this.servID}.json`,
-			'parent': [`1w66DVUF_p8A7R8_uU8pELrOr4ur7AvUI`]
+			'name': `server_list.json`,
 		}
 
 		let media = {
 			mimeType: 'application/json',
-			body: fs.createReadStream(`../servers/${this.servID}.json`)
+			body: fs.createReadStream(`server_list.json`)
 		}
 
-		let response = driveService.files.create({
+		await driveService.files.update({
+			fileId: id,
 			resource: fileMetaData,
 			media: media,
-			fields: 'id'
 		})
+	}
 
-		switch(response.status) {
-			case 200:
-				console.log(reponse.data.id)
+	async getDrive () {
+		const KEYFILEPATH = 'keyfile.json';
+		const SCOPES = ['https://www.googleapis.com/auth/drive'];
+		const auth = new google.auth.GoogleAuth({
+			keyFile: KEYFILEPATH,
+			scopes: SCOPES
+		});
+		const driveService = google.drive({version: 'v3', auth});
+
+		const list = await driveService.files.list({
+			'q': "'1w66DVUF_p8A7R8_uU8pELrOr4ur7AvUI' in parents"
+		});
+		const files = list.data.files;
+		for (let i in files) {
+			let File = await driveService.files.get({
+				fileId: files[i].id
+			});
+			let pathf = "";
+			if (File.data.name !== "server_list.json")
+				pathf = "servers/";
+			//var dest = fs.createWriteStream(pathf + File.data.name);
+			let check = await driveService.files.get(
+			{fileId: files[i].id, alt: "media"},
+			{responseType: "arraybuffer"},
+			)
+			let buf = Buffer.from(check.data);
+			fs.writeFile(pathf + File.data.name, buf, 'utf8', undefined);
 		}
 	}
-
-	importFolder () {
-
-	}
-
 }
