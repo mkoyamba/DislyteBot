@@ -51,6 +51,7 @@ export async function pars (message, client, servID, servName) {
 	if (msg.startsWith("*help")) {
 		let help = new helpC(message, client, servID, servName);
 		help.exec();
+		message.delete();
 		return google.update();
 	}
 
@@ -58,24 +59,28 @@ export async function pars (message, client, servID, servName) {
 	else if (msg.startsWith("*server")) {
 		let server = new servC(message, client, servID, servName);
 		server.exec();
+		message.delete();
 		return google.update();
 	}
 
 	else if (msg.startsWith("*club")) {
 		let club = new clubC(message, client, servID, servName);
 		club.exec();
+		message.delete();
 		return google.update();
 	}
 
 	else if (msg.startsWith("*player")) {
 		let player = new playerC(message, client, servID, servName);
 		player.exec();
+		message.delete();
 		return google.update();
 	}
 
 	else if (msg.startsWith("*esper")) {
 		let esper = new esperC(message, client, servID, servName);
 		esper.exec();
+		message.delete();
 		return google.update();
 	}
 

@@ -176,6 +176,7 @@ export class playerC {
 		let newdata = JSON.stringify(datasheet, null, 2);
 		fs.writeFile(this.path, newdata, 'utf8', undefined);
 		this.message.channel.send(`**Membre ajouté.**`)
+		return ;
 	}
 
 	//suppression d'un joueur
@@ -213,6 +214,7 @@ export class playerC {
 		let newdata = JSON.stringify(datasheet, null, 2);
 		fs.writeFile(this.path, newdata, 'utf8', undefined);
 		this.message.channel.send(`**Membre supprimé.**`)
+		return ;
 	}
 
 	//display les infos d'un joueur
@@ -227,7 +229,8 @@ export class playerC {
 			return this.error(10)
 		let temp = new msgTempC;
 		let msg = temp.playerInfos(datasheet, parsed.args[0]);
-		return this.message.channel.send(msg);
+		this.message.channel.send(msg);
+		return ;
 	}
 
 	//modifie les stats d'un joueur
@@ -273,7 +276,8 @@ export class playerC {
 		datasheet.club[pos[0]].members[pos[1]].stats["update"] = date;
 		let newdata = JSON.stringify(datasheet, null, 2);
 		fs.writeFile(this.path, newdata, 'utf8', undefined);
-		return this.message.channel.send("**Informations modifiées!**")
+		this.message.channel.send("**Informations modifiées!**");
+		return ;
 	}
 
 	adminSetStat (parsed) {
@@ -318,7 +322,8 @@ export class playerC {
 		datasheet.club[pos[0]].members[pos[1]].stats["update"] = date;
 		let newdata = JSON.stringify(datasheet, null, 2);
 		fs.writeFile(this.path, newdata, 'utf8', undefined);
-		return this.message.channel.send("**Informations modifiées!**")
+		this.message.channel.send("**Informations modifiées!**");
+		return ;
 	}
 
 	getStat (parsed) {
@@ -332,7 +337,8 @@ export class playerC {
 		let pseudo = datasheet.club[pos[0]].members[pos[1]].name;
 		let msgT = new msgTempC;
 		let msg = msgT.playerStats(datasheet, pseudo, this.elist, this.elist_dps, this.elist_sup, this.elist_tank, this.elist_neutra);
-		return this.message.channel.send(msg);
+		this.message.channel.send(msg);
+		return ;
 	}
 
 	adminGetStat (parsed) {
@@ -347,7 +353,8 @@ export class playerC {
 		let pseudo = parsed.args[0];
 		let msgT = new msgTempC;
 		let msg = msgT.playerStats(datasheet, pseudo, this.elist, this.elist_dps, this.elist_sup, this.elist_tank, this.elist_neutra);
-		return this.message.channel.send(msg);
+		this.message.channel.send(msg);
+		return ;
 	}
 
 	error (x) {
