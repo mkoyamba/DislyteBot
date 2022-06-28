@@ -134,6 +134,7 @@ export class esperC {
 		datasheet.club[pos[0]].members[pos[1]].stats.update = tools.timeStamp;
 		let newdata = JSON.stringify(datasheet, null, 2);
 		fs.writeFile(this.path, newdata, 'utf8', undefined);
+		this.message.delete()
 		return ;
 	}
 
