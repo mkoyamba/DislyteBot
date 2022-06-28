@@ -336,12 +336,12 @@ export class playerC {
 	}
 
 	adminGetStat (parsed) {
+		let tools = new toolsC;
+		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		if (!this.message.member.roles.cache.has(datasheet.roles.admin.id))
 			return this.error(2)
-		let tools = new toolsC;
 		if (parsed.args.length !== 1)
 			return this.error(3)
-		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		if (!tools.isName(datasheet, parsed.args[0]))
 			return this.error(10)
 		let pseudo = parsed.args[0];
