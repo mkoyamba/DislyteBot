@@ -123,7 +123,6 @@ export class googleC {
 			let pathf = "";
 			if (File.data.name !== "server_list.json")
 				pathf = "servers/";
-			//var dest = fs.createWriteStream(pathf + File.data.name);
 			let check = await driveService.files.get(
 			{fileId: files[i].id, alt: "media"},
 			{responseType: "arraybuffer"},
