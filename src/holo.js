@@ -80,7 +80,7 @@ export class holoC {
 			return this.error(8)
 		for (let i in datasheet.club) {
 			if (datasheet.club[i] !== "" && datasheet.club[i]["club name"] === clubname)
-				datasheet.club[i]["holo channel"] === tagChan.id;
+				datasheet.club[i]["holo channel"] = tagChan.id;
 		}
 		let newdata = JSON.stringify(datasheet, null, 2);
 		fs.writeFile(this.path, newdata, 'utf8', undefined);
