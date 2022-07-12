@@ -78,9 +78,8 @@ export class holoC {
 			return this.error (7);
 		if (!tools.isClub(datasheet, clubname))
 			return this.error(8)
-		console.log(tagChan)
 		for (let i in datasheet.club) {
-			if (datasheet.club[i]["club name"] && datasheet.club[i]["club name"] === clubname)
+			if (datasheet.club[i] !== "" && datasheet.club[i]["club name"] === clubname)
 				datasheet.club[i]["holo channel"] === tagChan.id;
 		}
 		let newdata = JSON.stringify(datasheet, null, 2);
