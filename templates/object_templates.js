@@ -61,6 +61,7 @@ export class objTempC {
 	clubProperties () {
 		let result = {
 			"club name": "",
+			"holo channel": "",
 			"role name": "",
 			"role id": "",
 			"members": {

@@ -8,6 +8,7 @@ import { clubC } from './club.js'
 import { helpC } from './help.js'
 import { esperC } from './esper.js'
 import { objTempC } from './../templates/object_templates.js'
+import { holoC } from './holo.js'
 import { googleC } from './google.js'
 
 /*		================		*/
@@ -80,6 +81,13 @@ export async function pars (message, client, servID, servName) {
 	else if (msg.startsWith("*esper")) {
 		let esper = new esperC(message, client, servID, servName);
 		esper.exec();
+		message.delete();
+		return google.update();
+	}
+
+	else if (msg.startsWith("*holo")) {
+		let holo = new holoC(message, client, servID, servName);
+		holo.exec();
 		message.delete();
 		return google.update();
 	}
