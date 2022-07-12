@@ -72,7 +72,7 @@ export class holoC {
 			return this.error (2)
 		if (!this.message.mentions.channels.first())
 			return this.error(4);
-		let tagChan = this.message.mentions.roles.first();
+		let tagChan = this.message.mentions.channels.first();
 		let clubname = parsed["args"][0];
 		if (clubname.length > 12)
 			return this.error (7);
