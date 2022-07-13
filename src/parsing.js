@@ -88,7 +88,6 @@ export async function pars (message, client, servID, servName) {
 	else if (msg.startsWith("*holo")) {
 		let holo = new holoC(message, client, servID, servName);
 		holo.exec();
-		message.delete();
 		return google.update();
 	}
 
