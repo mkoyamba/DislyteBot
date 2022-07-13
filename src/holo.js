@@ -105,7 +105,7 @@ export class holoC {
 		}
 		if (!this.message.member.roles.cache.has(admin.toString()))
 			return this.error (2)
-		await this.message.channel.bulkDelete(100, true);
+		await this.message.channel.bulkDelete(100, true).catch();
 		const embed = new DiscordJS.MessageEmbed()
 			.setColor('#ff0000')
 			.setTitle('Inscris ici tes points en holocombat!')
