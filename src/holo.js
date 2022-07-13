@@ -105,11 +105,11 @@ export class holoC {
 		}
 		if (!this.message.member.roles.cache.has(admin.toString()))
 			return this.error (2)
-		await message.channel.bulkDelete(100, true);
+		await this.message.channel.bulkDelete(100, true);
 		const embed = new DiscordJS.MessageEmbed()
 			.setColor('#ff0000')
 			.setTitle('Inscris ici tes points en holocombat!')
-		message.channel.send({embeds: [embed]})
+		this.message.channel.send({embeds: [embed]})
 
 		const row11 = new DiscordJS.MessageActionRow()
 			.addComponents(
@@ -155,7 +155,7 @@ export class holoC {
 			.setColor('#0099ff')
 			.setTitle('1er Combat')
 			.setDescription('Combien de points as-tu fait?');
-		message.channel.send({ embeds: [embed1], components: [row11, row12]})
+		this.message.channel.send({ embeds: [embed1], components: [row11, row12]})
 
 		const row21 = new DiscordJS.MessageActionRow()
 			.addComponents(
@@ -202,7 +202,7 @@ export class holoC {
 			.setTitle('2ème Combat')
 			.setDescription('Combien de points as-tu fait?');
 
-		message.channel.send({ embeds: [embed2], components: [row21, row22]})
+		this.message.channel.send({ embeds: [embed2], components: [row21, row22]})
 
 		const row31 = new DiscordJS.MessageActionRow()
 			.addComponents(
@@ -249,7 +249,7 @@ export class holoC {
 			.setTitle('3ème Combat')
 			.setDescription('Combien de points as-tu fait?');
 
-		message.channel.send({ embeds: [embed3], components: [row31, row32]})
+		this.message.channel.send({ embeds: [embed3], components: [row31, row32]})
 	}
 
 	//arrete une session holo (admin)
