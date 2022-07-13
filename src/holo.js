@@ -87,29 +87,174 @@ export class holoC {
 		return this.message.channel.send(`**Salon d'holocombat défini pour ${clubname}.**`);
 	}
 
-	//supression d'un club (admin)
-	start (parsed) {
+	//lance une session holo (admin)
+	async start (parsed) {
 		let tools = new toolsC;
-		if (parsed["args"].length !== 1)
+		if (parsed["args"].length !== 0)
 			return this.error (3)
 		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		let admin = datasheet.roles.admin.id;
+		let clubName = "";
+		for (let i in datasheet.club) {
+			if (datasheet.club[i] !== "" && datasheet.club[i]["holo channel"] === this.message.channel.id) {
+				clubName = datasheet.club[i]["club name"]
+			}
+		}
+		if (clubName === "") {
+			return this.error(9)
+		}
 		if (!this.message.member.roles.cache.has(admin.toString()))
 			return this.error (2)
-		let clubname = parsed["args"][0];
-		let index = 0;
-		for (let i in datasheet.club) {
-			index = i;
-			if (datasheet.club[i]["club name"] && (datasheet.club[i]["club name"] === clubname))
-				break ;
-		}
-		if (!datasheet.club[index]["club name"] || datasheet.club[index]["club name"] !== clubname)
-			return this.error(6);
+		await message.channel.bulkDelete(100, true);
+		const embed = new DiscordJS.MessageEmbed()
+			.setColor('#ff0000')
+			.setTitle('Inscris ici tes points en holocombat!')
+		message.channel.send({embeds: [embed]})
+
+		const row11 = new DiscordJS.MessageActionRow()
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button11000")
+					.setLabel("1000")
+					.setStyle("SUCCESS")
+			)
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button1750")
+					.setLabel("750")
+					.setStyle("SUCCESS")
+			)
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button1500")
+					.setLabel("500")
+					.setStyle("PRIMARY")
+			);
 		
+			const row12 = new DiscordJS.MessageActionRow()
+				.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button1375")
+					.setLabel("375")
+					.setStyle("SECONDARY")
+			)
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button1250")
+					.setLabel("250")
+					.setStyle("SECONDARY")
+			)
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button1125")
+					.setLabel("125")
+					.setStyle("SECONDARY")
+			);
+
+		const embed1 = new DiscordJS.MessageEmbed()
+			.setColor('#0099ff')
+			.setTitle('1er Combat')
+			.setDescription('Combien de points as-tu fait?');
+		message.channel.send({ embeds: [embed1], components: [row11, row12]})
+
+		const row21 = new DiscordJS.MessageActionRow()
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button21000")
+					.setLabel("1000")
+					.setStyle("SUCCESS")
+			)
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button2750")
+					.setLabel("750")
+					.setStyle("SUCCESS")
+			)
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button2500")
+					.setLabel("500")
+					.setStyle("PRIMARY")
+			);
+
+		const row22 = new DiscordJS.MessageActionRow()
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button2375")
+					.setLabel("375")
+					.setStyle("SECONDARY")
+			)
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button2250")
+					.setLabel("250")
+					.setStyle("SECONDARY")
+			)
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button2125")
+					.setLabel("125")
+					.setStyle("SECONDARY")
+			);
+
+		const embed2 = new DiscordJS.MessageEmbed()
+			.setColor('#0099ff')
+			.setTitle('2ème Combat')
+			.setDescription('Combien de points as-tu fait?');
+
+		message.channel.send({ embeds: [embed2], components: [row21, row22]})
+
+		const row31 = new DiscordJS.MessageActionRow()
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button31000")
+					.setLabel("1000")
+					.setStyle("SUCCESS")
+			)
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button3750")
+					.setLabel("750")
+					.setStyle("SUCCESS")
+			)
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button3500")
+					.setLabel("500")
+					.setStyle("PRIMARY")
+			);
+
+		const row32 = new DiscordJS.MessageActionRow()
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button3375")
+					.setLabel("375")
+					.setStyle("SECONDARY")
+			)
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button3250")
+					.setLabel("250")
+					.setStyle("SECONDARY")
+			)
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button3125")
+					.setLabel("125")
+					.setStyle("SECONDARY")
+			);
+
+		const embed3 = new DiscordJS.MessageEmbed()
+			.setColor('#0099ff')
+			.setTitle('3ème Combat')
+			.setDescription('Combien de points as-tu fait?');
+
+		message.channel.send({ embeds: [embed3], components: [row31, row32]})
 	}
 
-	//link un club a un role (admin)
+	//arrete une session holo (admin)
 	stop (parsed) {
+		let tools = new toolsC;
 		if (parsed["args"].length !== 2)
 			return this.error (3)
 		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
@@ -137,50 +282,6 @@ export class holoC {
 		return this.message.channel.send(`**Role ${tagRole} assigné pour ${clubname}.**`);
 	}
 
-	//affiche la liste des membres
-	members (parsed) {
-		let tools = new toolsC;
-		if (parsed["args"].length > 1)
-			return this.error (3)
-		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
-		if (!tools.isMember(this.message, datasheet))
-			return this.error(2)
-		let temp = new msgTempC;
-		let msg = temp.clubMembers(datasheet);
-		if (parsed.args.length === 1) {
-			let club = parsed.args[0];
-			if (!tools.isClub(datasheet, club)) {
-				return this.error(8)
-			}
-			for (let i in datasheet.club) {
-				if (datasheet.club[i] !== "" && datasheet.club[i]["club name"] === club) {
-					let msgE = new DiscordJS.MessageEmbed();
-					msgE.setDescription(msg[parseInt(i) - 1])
-					return this.message.channel.send(msgE)
-				}
-			}
-		}
-		for (let i in msg) {
-			let msgE = new DiscordJS.MessageEmbed();
-			msgE.setDescription(msg[i]);
-			this.message.channel.send(msgE);
-		}
-		return ;
-	}
-
-	list (parsed) {
-		let tools = new toolsC;
-		if (parsed["args"].length !== 0)
-			return this.error (3)
-		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
-		if (!tools.isMember(this.message, datasheet))
-			return this.error(2);
-		let temp = new msgTempC;
-		let msg = temp.clubList (datasheet);
-		return this.message.channel.send(msg);
-	}
-
-	
 	error (x) {
 		if (x === 1) {
 			this.message.channel.send("**Ce n'est pas une commande valide : *help**");
@@ -207,7 +308,7 @@ export class holoC {
 			this.message.channel.send("**Ce club n'existe pas.**");
 		}
 		else if (x === 9) {
-			this.message.channel.send("**Ce club existe déjà.**");
+			this.message.channel.send("**Mauvais salon.**");
 		}
 		return (undefined)
 	}

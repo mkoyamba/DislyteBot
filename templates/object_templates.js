@@ -39,6 +39,9 @@ export class objTempC {
 			"nickname": nickname,
 			"id": id,
 			"club": "",
+			"holo1": "",
+			"holo2": "",
+			"holo3": "",
 			"stats": {
 				"level": "",
 				"tour1": "",
