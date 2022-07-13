@@ -130,6 +130,12 @@ export class holoC {
 					.setCustomId("button1500")
 					.setLabel("500")
 					.setStyle("PRIMARY")
+			)
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button10")
+					.setLabel("X")
+					.setStyle("DANGER")
 			);
 		
 			const row12 = new DiscordJS.MessageActionRow()
@@ -150,6 +156,12 @@ export class holoC {
 					.setCustomId("button1125")
 					.setLabel("125")
 					.setStyle("SECONDARY")
+			)
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button10")
+					.setLabel("X")
+					.setStyle("DANGER")
 			);
 
 		const embed1 = new DiscordJS.MessageEmbed()
@@ -176,6 +188,12 @@ export class holoC {
 					.setCustomId("button2500")
 					.setLabel("500")
 					.setStyle("PRIMARY")
+			)
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button20")
+					.setLabel("X")
+					.setStyle("DANGER")
 			);
 
 		const row22 = new DiscordJS.MessageActionRow()
@@ -196,6 +214,12 @@ export class holoC {
 					.setCustomId("button2125")
 					.setLabel("125")
 					.setStyle("SECONDARY")
+			)
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button20")
+					.setLabel("X")
+					.setStyle("DANGER")
 			);
 
 		const embed2 = new DiscordJS.MessageEmbed()
@@ -223,6 +247,12 @@ export class holoC {
 					.setCustomId("button3500")
 					.setLabel("500")
 					.setStyle("PRIMARY")
+			)
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button30")
+					.setLabel("X")
+					.setStyle("DANGER")
 			);
 
 		const row32 = new DiscordJS.MessageActionRow()
@@ -243,6 +273,12 @@ export class holoC {
 					.setCustomId("button3125")
 					.setLabel("125")
 					.setStyle("SECONDARY")
+			)
+			.addComponents(
+				new DiscordJS.MessageButton()
+					.setCustomId("button30")
+					.setLabel("X")
+					.setStyle("DANGER")
 			);
 
 		const embed3 = new DiscordJS.MessageEmbed()
@@ -256,31 +292,23 @@ export class holoC {
 	//arrete une session holo (admin)
 	stop (parsed) {
 		let tools = new toolsC;
-		if (parsed["args"].length !== 2)
+		if (parsed["args"].length !== 0)
 			return this.error (3)
 		var datasheet = JSON.parse(fs.readFileSync(this.path).toString());
 		let admin = datasheet.roles.admin.id;
+		let clubName = "";
+		for (let i in datasheet.club) {
+			if (datasheet.club[i] !== "" && datasheet.club[i]["holo channel"] === this.message.channel.id) {
+				clubName = datasheet.club[i]["club name"]
+			}
+		}
+		if (clubName === "") {
+			return this.error(9)
+		}
 		if (!this.message.member.roles.cache.has(admin.toString()))
 			return this.error (2)
-		if (!this.message.mentions.roles.first())
-			return this.error(4);
-		let tagRole = this.message.mentions.roles.first();
-		let clubname = parsed["args"][0];
-		if (clubname.length > 12)
-			return this.error (7);
-		let index = 0;
-		for (let i in datasheet.club) {
-			index = i;
-			if (datasheet.club[i]["club name"] === clubname)
-				break ;
-		}
-		if (datasheet.club[index]["club name"] !== clubname)
-			return this.error(8);
-		datasheet.club[index]["role name"] = tagRole.name;
-		datasheet.club[index]["role id"] = tagRole.id;
-		let newdata = JSON.stringify(datasheet, null, 2);
-		fs.writeFile(this.path, newdata, 'utf8', undefined);
-		return this.message.channel.send(`**Role ${tagRole} assigné pour ${clubname}.**`);
+		this.message.channel.bulkDelete(100, true).catch();
+		this.message.channel.send("**Pas d'holocombat en cours.**")
 	}
 
 	error (x) {
