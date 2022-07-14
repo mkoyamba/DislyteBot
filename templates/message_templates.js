@@ -1,4 +1,5 @@
 // Private imports
+import { Emoji } from 'discord.js';
 import { toolsC } from './../src/tools.js'
 
 export class msgTempC {
@@ -292,6 +293,35 @@ export class msgTempC {
 		}
 		msg += `\n#         modifié le ${timeStamp[0]} à ${timeStamp[1]}\n`;
 		msg += "```";
+		return msg;
+	}
+
+	holoPending (infos) {
+		let msg = `📍  **Points actuels : ${infos.points}/${infos.maxPoints}**\n\n`;
+		msg += `        Joueurs restants : ${infos.playerLeft}\n`;
+		msg += `        Point moyens à faire par joueurs : ${infos.average}\n\n`;
+		msg += ":crossed_swords:   **Meilleurs scores**\n\n";
+		msg += `1. ${infos.scoreName1} **${infos.scorePoints1}** pts\n2. ${infos.scoreName2} **${infos.scorePoints2}** pts\n3. ${infos.scoreName3} **${infos.scorePoints3}** pts\n\n`;
+		msg += `🏆    **Leaderboard de la semaine**\n\n`;
+		msg += `1. ${infos.weekName1} **${infos.weekPoints1}** pts\n2. ${infos.weekName2} **${infos.weekPoints2}** pts\n3. ${infos.weekName3} **${infos.weekPoints3}** pts`;
+		return msg;
+	}
+
+	holoWin (infos) {
+		let msg = "🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳\n🥳                                                             🥳\n🥳                    **VICTOIRE**                      🥳\n🥳                                                             🥳\n🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳\n\n";
+		msg += ":crossed_swords:   **Meilleurs scores**\n\n";
+		msg += `1. ${infos.scoreName1} **${infos.scorePoints1}** pts\n2. ${infos.scoreName2} **${infos.scorePoints2}** pts\n3. ${infos.scoreName3} **${infos.scorePoints3}** pts\n\n`;
+		msg += `🏆    **Leaderboard**\n\n`;
+		msg += `1. ${infos.weekName1} **${infos.weekPoints1}** pts\n2. ${infos.weekName2} **${infos.weekPoints2}** pts\n3. ${infos.weekName3} **${infos.weekPoints3}** pts`;
+		return msg;
+	}
+
+	holoLost (infos) {
+		let msg = "😭😭😭😭😭😭😭😭😭😭😭😭\n😭                                                             😭\n😭                      **DÉFAITE**                      😭\n😭                                                             😭\n😭😭😭😭😭😭😭😭😭😭😭😭\n\n";
+		msg += ":crossed_swords:   **Meilleurs scores**\n\n";
+		msg += `1. ${infos.scoreName1} **${infos.scorePoints1}** pts\n2. ${infos.scoreName2} **${infos.scorePoints2}** pts\n3. ${infos.scoreName3} **${infos.scorePoints3}** pts\n\n`;
+		msg += `🏆    **Leaderboard**\n\n`;
+		msg += `1. ${infos.weekName1} **${infos.weekPoints1}** pts\n2. ${infos.weekName2} **${infos.weekPoints2}** pts\n3. ${infos.weekName3} **${infos.weekPoints3}** pts`;
 		return msg;
 	}
 }

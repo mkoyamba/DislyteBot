@@ -30,6 +30,8 @@ export class helpC {
 			return this.player();
 		else if (msg == "*help esper")
 			return this.esper();
+		else if (msg == "*help holo")
+			return this.holo();
 		return ;
 	}
 
@@ -45,12 +47,12 @@ export class helpC {
 		msg += "                                                           *player stat adminset [args]\n";
 		msg += "                                                           *player stats\n";
 		msg += "                                                           *player adminstats\n\n\n\n";
-		msg += "# ESPER                                           HELP\n\n";
-		msg += "  *esper [esper][niveau][speed]                   *help\n";
-		msg += "  *esper remove [esper]                           *help server\n";
-		msg += "  *esper list {en maintenance}                    *help club\n";
-		msg += "  *esper admin [pseudo][esper][niv][speed]        *help player\n";
-		msg += "  *esper admin remove [pseudo][esper]             *help esper\n\n\n";
+		msg += "# ESPER                                        HOLO                                 HELP\n\n";
+		msg += "  *esper [esper][niveau][speed]                *holo channel [club][tag]            *help\n";
+		msg += "  *esper remove [esper]                        *holo start [joueurs][points]        *help server\n";
+		msg += "  *esper list {en maintenance}                 *holo stop                           *help club\n";
+		msg += "  *esper admin [pseudo][esper][niv][speed]                                          *help player\n";
+		msg += "  *esper admin remove [pseudo][esper]                                               *help esper\n\n\n";
 		msg += "# DyslyteHelper by konwiz\n";
 		msg += "```";
 		return this.message.channel.send(msg)
@@ -87,7 +89,7 @@ export class helpC {
 	player () {
 		let msg = "```cs\n";
 		msg += "    Liste des commandes player :\n\n\n";
-		msg += "#   *player add [pseudo][club]:\n";
+		msg += "#   *player add [pseudo][club][tag]:\n";
 		msg += "        Crée une nouvelle fiche joueur.\n             Admin uniquement.\n\n";
 		msg += "#  *player remove [pseudo] :\n";
 		msg += "        Supprime la fiche joueur.\n         Admin uniquement.\n\n";
@@ -127,6 +129,20 @@ export class helpC {
 		msg += "        Ajoute un esper à la box du joueur ou modifie ses stats.\n        Le nom de l`esper doit être sans les espaces.\n         Admin uniquement.\n\n";
 		msg += "#   *esper admin remove [esper] :\n";
 		msg += "        Supprime l`esper de la box du joueur.\n        Le nom de l`esper doit être sans les espaces.\n         Admin uniquement.\n\n\n";
+		msg += "# DyslyteHelper by konwiz\n";
+		msg += "```";
+		return this.message.channel.send(msg)
+	}
+
+	holo () {
+		let msg = "```cs\n";
+		msg += "    Liste des commandes d`holocombat :\n\n\n";
+		msg += "#   *holo channel [club][tag] :\n";
+		msg += "        Assigne un salon holocombat à un club.\n         Admin uniquement.\n\n";
+		msg += "#   *holo start [nombres de joueurs][points à atteindre] :\n";
+		msg += "        Lance un holocombat si effectué dans le channel du club.\n         Admin uniquement.\n\n";
+		msg += "#   *holo stop :\n";
+		msg += "        Arrête l`holocombat en cours si effectué dans le channel du club.\n        Admin uniquement.\n\n";
 		msg += "# DyslyteHelper by konwiz\n";
 		msg += "```";
 		return this.message.channel.send(msg)

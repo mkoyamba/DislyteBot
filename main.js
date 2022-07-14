@@ -5,6 +5,7 @@ import fs from 'fs-extra'
 
 // Own imports
 import { pars } from './src/parsing.js'
+import { holoC } from './src/holo.js'
 import { googleC } from './src/google.js'
 
 dotenv.config();
@@ -20,6 +21,12 @@ const client = new DiscordJS.Client({
 		Intents.FLAGS.GUILDS,
 		Intents.FLAGS.GUILD_MESSAGES,
 		Intents.FLAGS.GUILD_MEMBERS,
+		Intents.FLAGS.GUILD_MESSAGE_REACTIONS
+	],
+	partials: [
+		'MESSAGE',
+		'CHANNEL',
+		'REACTION'
 	]
 });
 
@@ -39,6 +46,51 @@ client.on('message', message => {
 	if (message.content.startsWith("*")) {
 		pars(message, client, message.guild.id, message.guild.name);
 	}
+})
+
+//récupération de l'interaction
+client.on('interactionCreate', async interaction => {
+	if (interaction.isButton()) {
+		if (interaction.customId.startsWith("holo")) {
+			let google = new googleC(interaction.guild.id);
+			const holo = new holoC;
+			holo.interaction(interaction, interaction.guild.id)
+			google.update();
+			return interaction.deferUpdate();
+		}
+	}
+})
+
+client.on("messageReactionAdd", async (reaction, user) => {
+	if (reaction.partial) {
+		try {
+			await reaction.fetch();
+		} catch (error) {
+			return ;
+		}
+	}
+	if (reaction.emoji.name !== "🔄")
+		return;
+	if (!reaction.message.embeds[0] || reaction.message.embeds[0].title !== "Status de l'holocombat")
+		return ;
+	const holo = new holoC;
+	holo.update(reaction, reaction.message.guild.id, user);
+})
+
+client.on("messageReactionRemove", async (reaction, user) => {
+	if (reaction.partial) {
+		try {
+			await reaction.fetch();
+		} catch (error) {
+			return ;
+		}
+	}
+	if (reaction.emoji.name !== "🔄")
+		return;
+	if (!reaction.message.embeds[0] || reaction.message.embeds[0].title !== "Status de l'holocombat")
+		return ;
+	const holo = new holoC;
+	holo.update(reaction, reaction.message.guild.id, user);
 })
 
 client.login(process.env.TOKEN)

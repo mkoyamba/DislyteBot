@@ -67,6 +67,7 @@ export class objTempC {
 			"holo channel": "",
 			"role name": "",
 			"role id": "",
+			"holo status": "",
 			"members": {
 				"1": "",
 				"2": "",
