@@ -180,14 +180,14 @@ export class clubC {
 				if (datasheet.club[i] !== "" && datasheet.club[i]["club name"] === club) {
 					let msgE = new DiscordJS.MessageEmbed();
 					msgE.setDescription(msg[parseInt(i) - 1])
-					return this.message.channel.send(msgE)
+					this.message.channel.send({embeds: [msgE]});
 				}
 			}
 		}
 		for (let i in msg) {
 			let msgE = new DiscordJS.MessageEmbed();
 			msgE.setDescription(msg[i]);
-			this.message.channel.send(msgE);
+			this.message.channel.send({embeds: [msgE]});
 		}
 		return ;
 	}
