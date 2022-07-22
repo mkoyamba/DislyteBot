@@ -120,8 +120,6 @@ export class holoC {
 		if (!this.message.member.roles.cache.has(admin.toString()))
 			return this.error (2)
 		datasheet.club[clubID]["holo status"] = `${parsed["args"][0]} ${parsed["args"][1]}`
-		let newdata = JSON.stringify(datasheet, null, 2);
-		fs.writeFile(this.path, newdata, 'utf8', undefined);
 		this.message.channel.bulkDelete(100, true).catch();
 
 		const status = new DiscordJS.MessageEmbed()
@@ -305,7 +303,7 @@ export class holoC {
 				datasheet.club[clubID].members[i].holo1 = "0 0 0";
 			}
 		}
-		newdata = JSON.stringify(datasheet, null, 2);
+		let newdata = JSON.stringify(datasheet, null, 2);
 		fs.writeFile(this.path, newdata, 'utf8', undefined);
 	}
 

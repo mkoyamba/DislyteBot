@@ -86,6 +86,7 @@ export async function pars (message, client, servID, servName) {
 	}
 
 	else if (msg.startsWith("*holo")) {
+		//google.setSheet()
 		let holo = new holoC(message, client, servID, servName);
 		holo.exec();
 		return google.update();
